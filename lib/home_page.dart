@@ -1,8 +1,9 @@
 import 'dart:async';
+import 'dart:async' show Future;
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-import 'dart:async' show Future;
+import 'package:yolohealth/MyCheckBox.dart';
 
 class _InputDropdown extends StatelessWidget {
   const _InputDropdown({
@@ -71,10 +72,7 @@ class _DateTimePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle valueStyle = Theme
-        .of(context)
-        .textTheme
-        .title;
+    final TextStyle valueStyle = Theme.of(context).textTheme.title;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
@@ -136,20 +134,9 @@ class _HomePageState extends State<HomePage> {
     List<DropdownMenuItem<String>> itemsList = new List();
     for (String kiosk in _allKiosk) {
       print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + kiosk);
-//      itemsList.map((kiosk) => CheckboxListTile(
-//        title: Text(kiosk.toString()),
-//        value: _isChecked,
-//        onChanged: (val) {
-//          setState(() {
-//            _isChecked = val;
-//          });
-//        },
-//      ));
-
 
       itemsList = _allKiosk.map<DropdownMenuItem<String>>((String kiosk) {
         return DropdownMenuItem<String>(
-          key: GlobalKey(),
           value: kiosk,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -158,41 +145,11 @@ class _HomePageState extends State<HomePage> {
                 kiosk,
               ),
               SizedBox(width: 10),
-              Checkbox(
-                value: _isChecked,
-                onChanged: (bool value) {
-                  setState(() {
-                    _isChecked = value;
-                  });
-                },
-              ),
+              MyCheckBox(),
             ],
           ),
         );
       }).toList();
-
-
-      /*itemsList.add(new DropdownMenuItem(
-        value: kiosk,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(
-              kiosk,
-            ),
-            SizedBox(width: 10),
-//            Checkbox(
-//              value: _isChecked,
-//              onChanged: (bool value) {
-//                setState(() {
-//                  _isChecked = value;
-//                });
-//              },
-//            ),
-          ],
-        ),
-      ));
-*/
     }
     return itemsList;
   }
@@ -250,8 +207,7 @@ class _HomePageState extends State<HomePage> {
       child: DropdownButton<String>(
           value: _currentKiosk,
           onChanged: changedDropDownItem,
-          items: getDropDownMenuItems()
-      ),
+          items: getDropDownMenuItems()),
     );
 
     final _body = new DropdownButtonHideUnderline(
