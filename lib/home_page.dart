@@ -115,10 +115,8 @@ class _HomePageState extends State<HomePage> {
   String _getToDate = '';
 
   List<DropdownMenuItem<String>> _dropDownMenuItems;
-
-  bool _isChecked = false;
-
-  int count = 0;
+  Map<String, bool> bools = Map<String, bool>();
+  String _message;
 
   @override
   void initState() {
@@ -131,12 +129,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   List<DropdownMenuItem<String>> getDropDownMenuItems() {
-    List<DropdownMenuItem<String>> itemsList = new List();
+    List<DropdownMenuItem<String>> itemsList = List();
     for (String kiosk in _allKiosk) {
       print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + kiosk);
-
-      itemsList = _allKiosk.map<DropdownMenuItem<String>>((String kiosk) {
-        return DropdownMenuItem<String>(
+      bools[kiosk] = false;
+      itemsList.add(
+        DropdownMenuItem<String>(
           value: kiosk,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -145,17 +143,25 @@ class _HomePageState extends State<HomePage> {
                 kiosk,
               ),
               SizedBox(width: 10),
-              MyCheckBox(),
+              MyCheckBox(
+                isChecked: bools[kiosk],
+              )
             ],
           ),
-        );
-      }).toList();
+        ),
+      );
     }
     return itemsList;
   }
 
   void changedDropDownItem(String selectedKiosk) {
     print("Selected Kiosk $selectedKiosk");
+    int count = 0;
+    bools.forEach((k, v) {
+      if (v == true) {
+        setState(() => count++);
+      }
+    });
 //    setState(() {
 //      _currentKiosk = selectedKiosk;
 //    });

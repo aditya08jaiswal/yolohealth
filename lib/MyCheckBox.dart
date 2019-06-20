@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
 class MyCheckBox extends StatefulWidget {
+  bool isChecked = false;
+  MyCheckBox({this.isChecked});
   @override
   _MyCheckBoxState createState() => _MyCheckBoxState();
 }
 
 class _MyCheckBoxState extends State<MyCheckBox> {
-  bool isChecked = false;
-
   void _onChanged(bool value) {
-    setState(() => isChecked = value);
+    setState(() => widget.isChecked = value);
   }
 
   @override
   Widget build(BuildContext context) {
     return Checkbox(
-      value: isChecked,
+      value: widget.isChecked,
       onChanged: _onChanged,
     );
   }
