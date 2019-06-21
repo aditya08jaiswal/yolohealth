@@ -1,11 +1,8 @@
-import 'dart:async';
-import 'dart:async' show Future;
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:yolohealth/MyCheckBox.dart';
-import 'GlobalState.dart';
+
 import 'DateTimePicker.dart';
+import 'GlobalState.dart';
 
 class HomePage extends StatefulWidget {
   static String tag = 'home-page';
@@ -90,7 +87,7 @@ class _HomePageState extends State<HomePage> {
       child: Text("GO"),
     );
 
-    final fromDate = new _DateTimePicker(
+    final fromDate = new DateTimePicker(
       labelText: 'From',
       selectedDate: _fromDate,
       selectDate: (DateTime date) {
@@ -102,7 +99,7 @@ class _HomePageState extends State<HomePage> {
       },
     );
 
-    final toDate = new _DateTimePicker(
+    final toDate = new DateTimePicker(
       labelText: 'To',
       selectedDate: _toDate,
       selectDate: (DateTime date) {

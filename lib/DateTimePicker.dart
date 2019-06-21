@@ -1,55 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'home_page.dart';
-
 import 'dart:async';
 import 'dart:async' show Future;
 
-class _InputDropdown extends StatelessWidget {
-  const _InputDropdown({
-    Key key,
-    this.child,
-    this.labelText,
-    this.valueText,
-    this.valueStyle,
-    this.onPressed,
-  }) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:yolohealth/InputDropdown.dart';
 
-  final String labelText;
-  final String valueText;
-  final TextStyle valueStyle;
-  final VoidCallback onPressed;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      child: InputDecorator(
-        decoration: InputDecoration(
-          labelText: labelText,
-        ),
-        baseStyle: valueStyle,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(valueText, style: valueStyle),
-//            Icon(
-//              Icons.arrow_drop_down,
-//              color: Theme.of(context).brightness == Brightness.light
-//                  ? Colors.grey.shade700
-//                  : Colors.white70,
-//            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _DateTimePicker extends StatelessWidget {
-  const _DateTimePicker({
+class DateTimePicker extends StatelessWidget {
+  const DateTimePicker({
     Key key,
     this.labelText,
     this.selectedDate,
@@ -78,7 +35,7 @@ class _DateTimePicker extends StatelessWidget {
       children: <Widget>[
         Expanded(
           flex: 4,
-          child: _InputDropdown(
+          child: InputDropdown(
             labelText: labelText,
             valueText: DateFormat.yMMMd().format(selectedDate),
             valueStyle: valueStyle,
