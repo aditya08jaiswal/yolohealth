@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:yolohealth/MyCheckBox.dart';
 
+import 'GlobalState.dart';
+
 class _InputDropdown extends StatelessWidget {
   const _InputDropdown({
     Key key,
@@ -115,7 +117,6 @@ class _HomePageState extends State<HomePage> {
   String _getToDate = '';
 
   List<DropdownMenuItem<String>> _dropDownMenuItems;
-  Map<String, bool> bools = Map<String, bool>();
   String _message;
 
   @override
@@ -132,7 +133,7 @@ class _HomePageState extends State<HomePage> {
     List<DropdownMenuItem<String>> itemsList = List();
     for (String kiosk in _allKiosk) {
       print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + kiosk);
-      bools[kiosk] = false;
+      GlobalState.instance.set(kiosk, false);
       itemsList.add(
         DropdownMenuItem<String>(
           value: kiosk,
@@ -144,7 +145,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(width: 10),
               MyCheckBox(
-                isChecked: bools[kiosk],
+                kiosk,
               )
             ],
           ),
@@ -157,10 +158,10 @@ class _HomePageState extends State<HomePage> {
   void changedDropDownItem(String selectedKiosk) {
     print("Selected Kiosk $selectedKiosk");
     int count = 0;
-    bools.forEach((k, v) {
-      if (v == true) {
-        setState(() => count++);
-      }
+    setState(() {
+      count = GlobalState.instance.counter();
+      _message = 'Kiosk : ' + count.toString();
+      print(_message);
     });
 //    setState(() {
 //      _currentKiosk = selectedKiosk;

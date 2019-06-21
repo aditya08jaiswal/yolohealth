@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 
+import 'GlobalState.dart';
+
 class MyCheckBox extends StatefulWidget {
-  bool isChecked = false;
-  MyCheckBox({this.isChecked});
+  String kiosk;
+  MyCheckBox(this.kiosk);
   @override
   _MyCheckBoxState createState() => _MyCheckBoxState();
 }
 
 class _MyCheckBoxState extends State<MyCheckBox> {
-  void _onChanged(bool value) {
-    setState(() => widget.isChecked = value);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Checkbox(
-      value: widget.isChecked,
-      onChanged: _onChanged,
+      value: GlobalState.instance.get(widget.kiosk),
+      onChanged: (bool value) {
+        setState(() {
+          GlobalState.instance.set(widget.kiosk, value);
+        });
+      },
     );
   }
 }
